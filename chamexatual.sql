@@ -15,10 +15,10 @@ LPAD (2, 2, 0) || '|' ||
 LPAD (1, 2, 0) || '|' ||
 LPAD(P.NUMNOTA,20,0) || '|' ||
 LPAD (1, 2, 0) || '|' ||
-LPAD (1, 2, 0) || '|' ||
+case when P.CODOPER='S' then '01' else '02' end || '|' ||
 TO_CHAR(P.DTMOV,'YYYYMMDD')|| '|' ||
 LPAD (0, 20, 0) || '|' ||
-RPAD(REPLACE(REPLACE(REPLACE(CGCENT,'-',''),'.',''),'/',''),20,0)|| '|' ||
+LPAD(REPLACE(REPLACE(REPLACE(CGCENT,'-',''),'.',''),'/',''),20,0)|| '|' ||
 'RJ' || '|' ||
 '21010410' || '|' ||
 C.ESTCOB || '|' ||
@@ -28,7 +28,7 @@ LPAD (1, 2, 0) ,P.NUMNOTA
 FROM PCMOV P
 left join PCCLIENT c on  p.codcli = c.codcli
 wHERE 
-P.CODOPER='S' AND
+--P.CODOPER='S' AND
 P.DTMOV >=:DTINI AND
 P.DTMOV <=:DTFIM AND
 P.CODPROD IN (SELECT CODPROD FROM PCPRODUT PO
@@ -41,11 +41,11 @@ LPAD (3, 2, 0) || '|' ||
 LPAD(P.NUMNOTA,20,0) || '|' ||
 LPAD (1, 2, 0) || '|' ||
 P.CODAUXILIAR || '|' ||
-LPAD (P.QT, 2, 0) || '|' ||
-LPAD (REPLACE(P.PUNIT,',','.'), 2, 0) || '|' ||
-LPAD (0, 1, 0) || '|' ||
-LPAD (REPLACE(P.QT*P.PUNIT,',','.'), 3, 0) || '|' ||
-LPAD (0, 2, 0) || '|' ||
+LPAD (p.qt, 2, 0) || '|' ||
+case when P.PUNIT < 1 then TO_CHAR(P.PUNIT,'0.99') else TO_CHAR(P.PUNIT,'999.99') end || '|' ||
+LPAD ('N', 1, 0) || '|' ||
+case when P.QT*P.PUNIT < 1 then TO_CHAR(P.QT*P.PUNIT,'0.99') else TO_CHAR(P.QT*P.PUNIT,'99999.99') end || '|' ||
+case when P.QT*P.PUNIT < 1 then TO_CHAR(P.QT*P.PUNIT,'0.99') else TO_CHAR(P.QT*P.PUNIT,'99999.99') end || '|' ||
 LPAD (0, 2, 0) || '|' ||
 LPAD (0, 2, 0) || '|' ||
 LPAD (0, 2, 0) || '|' ||
@@ -54,7 +54,7 @@ LPAD (0, 2, 0),P.NUMNOTA
 FROM PCMOV P
 left join PCCLIENT c on  p.codcli = c.codcli
 wHERE 
-P.CODOPER='S' AND
+--P.CODOPER='S' AND
 P.DTMOV >=:DTINI AND
 P.DTMOV <=:DTFIM AND
 P.CODPROD IN (SELECT CODPROD FROM PCPRODUT PO
