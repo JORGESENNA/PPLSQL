@@ -4,8 +4,6 @@ LPAD (1, 2, 0) || '|' ||
 LPAD (50, 3, 0) || '|' ||
 :SEQUENCIA || '|' ||
 TO_CHAR(SYSDATE-1,'YYYYMMDDhhmi')|| '|' ||
-TO_CHAR(SYSDATE-1,'YYYYMMDD')|| '|' ||
-TO_CHAR(SYSDATE-1,'YYYYMMDD') || '|' ||
 '16731862000124' || '|' ||
 '07216054000138'
 FROM DUAL
