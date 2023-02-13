@@ -41,7 +41,7 @@ LPAD (3, 2, 0) || '|' ||
 LPAD(P.NUMNOTA,20,0) || '|' ||
 LPAD (1, 2, 0) || '|' ||
 case when P.CODOPER='S' then '01' else '02' end || '|' ||
-P.CODAUXILIAR || '|' ||
+P.CODPROD || '|' ||
 LPAD (p.qt, 2, 0) || '|' ||
 case when P.PUNIT < 1 then TO_CHAR(P.PUNIT,'0.99') else TO_CHAR(P.PUNIT,'999.99') end || '|' ||
 LPAD ('N', 1, 0) || '|' ||
