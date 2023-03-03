@@ -27,7 +27,9 @@ LPAD (1, 50, 0)
 FROM PCMOV P
 left join PCCLIENT c on  p.codcli = c.codcli
 wHERE 
---P.CODOPER='S' AND   
+--P.CODOPER='S' AND 
+p.filial=1 and
+p.qt >0 and    
 P.DTMOV >=:DTINI AND
 P.DTMOV <=:DTFIM AND
 P.CODPROD IN (SELECT CODPROD FROM PCPRODUT PO
