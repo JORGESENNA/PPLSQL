@@ -11,8 +11,8 @@ union all
 SELECT DISTINCT 
 LPAD (2, 2, 0) || '|' ||
 '16731862000124' || '|' ||
-RPAD(Po.CODPROD,20,0) || '|' ||
-RPAD(Po.CODAUXILIAR,14,0) || '|' ||
+RPAD(Po.CODPROD,20,' ') || '|' ||
+RPAD(Po.CODAUXILIAR,14,' ') || '|' ||
 LPAD (1, 2, 0) || '|' ||
 LPAD (1, 2, 0) || '|' ||
 --case when P.PUNIT < 1 then TO_CHAR(P.PUNIT,'0.99') else TO_CHAR(P.PUNIT,'999.99') end || '|' ||
