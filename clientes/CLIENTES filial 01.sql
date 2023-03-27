@@ -6,7 +6,7 @@ LPAD (50, 3, 0) || '|' ||
 TO_CHAR(SYSDATE-1,'YYYYMMDDhhmi')|| '|' ||
 TO_CHAR(SYSDATE-1,'YYYYMMDD')|| '|' ||
 TO_CHAR(SYSDATE-1,'YYYYMMDD') || '|' ||
-'16731862000124' || '|' ||
+'22013079000209' || '|' ||
 '07216054000138'
 FROM DUAL
 union all
