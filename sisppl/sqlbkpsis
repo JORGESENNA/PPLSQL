@@ -1,0 +1,615 @@
+
+USE [master]
+GO
+/****** Object:  Database [BI]    Script Date: 28/03/2023 17:47:12 ******/
+CREATE DATABASE [BI]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'BI', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\BI.mdf' , SIZE = 10428416KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'BI_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\BI_log.ldf' , SIZE = 1314752KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+GO
+ALTER DATABASE [BI] SET COMPATIBILITY_LEVEL = 140
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [BI].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [BI] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [BI] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [BI] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [BI] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [BI] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [BI] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [BI] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [BI] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [BI] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [BI] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [BI] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [BI] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [BI] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [BI] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [BI] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [BI] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [BI] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [BI] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [BI] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [BI] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [BI] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [BI] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [BI] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [BI] SET  MULTI_USER 
+GO
+ALTER DATABASE [BI] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [BI] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [BI] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [BI] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [BI] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [BI] SET QUERY_STORE = OFF
+GO
+USE [BI]
+GO
+/****** Object:  User [PAPELEX\jorge.senna]    Script Date: 28/03/2023 17:47:13 ******/
+CREATE USER [PAPELEX\jorge.senna] FOR LOGIN [PAPELEX\jorge.senna] WITH DEFAULT_SCHEMA=[dbo]
+GO
+ALTER ROLE [db_securityadmin] ADD MEMBER [PAPELEX\jorge.senna]
+GO
+ALTER ROLE [db_backupoperator] ADD MEMBER [PAPELEX\jorge.senna]
+GO
+/****** Object:  Table [dbo].[bi]    Script Date: 28/03/2023 17:47:13 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[bi](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[urls] [nvarchar](max) NULL,
+	[nome] [nvarchar](100) NULL,
+	[iduser] [int] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[biletagem]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[biletagem](
+	[dslinha] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[biletagem1]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[biletagem1](
+	[dslinha] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[biletagem2]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[biletagem2](
+	[dslinha] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[biletagemtemp]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[biletagemtemp](
+	[dt] [nvarchar](15) NULL,
+	[ramal] [nvarchar](30) NULL,
+	[tel] [nvarchar](30) NULL,
+	[tp] [nvarchar](30) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[callcodcli]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[callcodcli](
+	[dt] [nvarchar](15) NULL,
+	[tel] [nvarchar](15) NULL,
+	[tempo] [nvarchar](15) NULL,
+	[codcli] [nvarchar](30) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[codcli]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[codcli](
+	[col01] [varchar](max) NULL,
+	[col02] [varchar](max) NULL,
+	[col03] [varchar](max) NULL,
+	[col04] [varchar](max) NULL,
+	[col05] [varchar](max) NULL,
+	[col06] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[loglogin]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[loglogin](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[iduser] [int] NULL,
+	[dtinicio] [datetime] NULL,
+	[dtfim] [datetime] NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[teste]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[teste](
+	[dslinha] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[teste2]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[teste2](
+	[col01] [varchar](max) NULL,
+	[col02] [varchar](max) NULL,
+	[col03] [varchar](max) NULL,
+	[col04] [varchar](max) NULL,
+	[col05] [varchar](max) NULL,
+	[col06] [varchar](max) NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Usuario]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Usuario](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[nome] [nvarchar](100) NULL,
+	[senha] [nvarchar](100) NULL,
+	[per] [nvarchar](100) NULL,
+	[tipo] [nvarchar](100) NULL,
+	[equipe] [nvarchar](100) NULL,
+	[ramal] [nvarchar](100) NULL,
+	[rca] [nvarchar](100) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[logus]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[logus]  @iduser int
+as
+
+--drop table loglogin 
+--create table loglogin (id int identity(1,1),iduser int,dtinicio datetime,dtfim datetime)
+
+insert into loglogin (iduser ,dtinicio,dtfim)
+select @iduser,getdate(),getdate()
+
+
+select top(1) id from loglogin where iduser=@iduser order by 1 desc
+
+GO
+/****** Object:  StoredProcedure [dbo].[logusup]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[logusup]  @iduser int,@id int
+as
+
+
+declare @upid int
+
+select top(1) @upid=id from loglogin where iduser=@iduser order by 1 desc
+
+
+if(@id=@upid)
+begin
+--drop table loglogin 
+--create table loglogin (id int identity(1,1),iduser int,dtinicio datetime,dtfim datetime)
+update loglogin set dtfim=getdate() where id=@id
+end
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[refrecall]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+--create table biletagem1 (dslinha varchar(max))
+--create table biletagem2 (dslinha varchar(max))
+--create table codcli (col01 varchar(max),col02 varchar(max),col03 varchar(max),col04 varchar(max),col05 varchar(max),col06 varchar(max))
+--create table biletagemtemp (dt nvarchar(15),ramal nvarchar(30),tel nvarchar(30) ,tp nvarchar(30))
+-- create table callcodcli(dt nvarchar(15),tel nvarchar(15), tempo nvarchar(15), codcli nvarchar(30) )
+CREATE procedure [dbo].[refrecall]
+as
+truncate table biletagem1
+truncate table biletagem2
+truncate table codcli
+truncate table biletagemtemp
+truncate table callcodcli
+
+-- select * from biletagemtemp
+-- select * from biletagem1
+-- select * from biletagemtemp
+
+--bulk insert biletagem1 from 'C:\BI\Papelex\bilhete_puro.bkp'
+--bulk insert biletagem2 from 'C:\BI\Papelex anexo\bilhete_puro.bkp'
+
+bulk insert biletagem1 from 'C:\BI\Papelex\bilhete_puro.txt'
+bulk insert biletagem2 from 'C:\BI\Papelex anexo\bilhete_puro.txt'
+
+delete from biletagem1 where len(SUBSTRING ( dslinha ,1 , 8 ))<>8
+delete from biletagem2 where len(SUBSTRING ( dslinha ,1 , 8 ))<>8
+delete from biletagem1 where SUBSTRING ( dslinha ,3 , 1 )<>'.' 
+delete from biletagem2 where SUBSTRING ( dslinha ,3 , 1 )<>'.' 
+
+
+insert into biletagemtemp(dt,ramal,tel,tp)
+select  convert(date,SUBSTRING ( dslinha ,1 , 8 ))dt,SUBSTRING ( dslinha ,22 , 4 )ramal,SUBSTRING ( dslinha ,39 , 13 )telfone, SUBSTRING ( dslinha ,34 , 5 )tempo from biletagem1
+where month(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=month(convert(date,getdate())) and year(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=year(convert(date,getdate())) 
+
+
+insert into biletagemtemp(dt,ramal,tel,tp)
+select  convert(date,SUBSTRING ( dslinha ,1 , 8 ))dt,SUBSTRING ( dslinha ,22 , 4 )ramal,SUBSTRING ( dslinha ,39 , 13 )telfone, SUBSTRING ( dslinha ,34 , 5 )tempo from biletagem2
+where month(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=month(convert(date,getdate())) and year(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=year(convert(date,getdate())) 
+
+----Inserido como teste
+truncate table biletagem1
+truncate table biletagem2
+
+bulk insert biletagem1 from 'C:\BI\Papelex\bilhete_puro.bkp'
+bulk insert biletagem2 from 'C:\BI\Papelex anexo\bilhete_puro.bkp'
+
+delete from biletagem1 where len(SUBSTRING ( dslinha ,1 , 8 ))<>8
+delete from biletagem2 where len(SUBSTRING ( dslinha ,1 , 8 ))<>8
+delete from biletagem1 where SUBSTRING ( dslinha ,3 , 1 )<>'.' 
+delete from biletagem2 where SUBSTRING ( dslinha ,3 , 1 )<>'.' 
+
+
+insert into biletagemtemp(dt,ramal,tel,tp)
+select  convert(date,SUBSTRING ( dslinha ,1 , 8 ))dt,SUBSTRING ( dslinha ,22 , 4 )ramal,SUBSTRING ( dslinha ,39 , 13 )telfone, SUBSTRING ( dslinha ,34 , 5 )tempo from biletagem1
+where month(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=month(convert(date,getdate())) and year(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=year(convert(date,getdate())) 
+
+
+insert into biletagemtemp(dt,ramal,tel,tp)
+select  convert(date,SUBSTRING ( dslinha ,1 , 8 ))dt,SUBSTRING ( dslinha ,22 , 4 )ramal,SUBSTRING ( dslinha ,39 , 13 )telfone, SUBSTRING ( dslinha ,34 , 5 )tempo from biletagem2
+where month(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=month(convert(date,getdate())) and year(convert(date,SUBSTRING ( dslinha ,1 , 8 )))=year(convert(date,getdate())) 
+
+
+
+
+ delete from biletagemtemp where tel='0000000000'
+ delete from biletagemtemp where tel='000000000'
+ delete from biletagemtemp where tel='00000000'
+ delete from biletagemtemp where tel='0000000'
+ delete from biletagemtemp where tel='000000'
+ delete from biletagemtemp where tel='00000'
+ delete from biletagemtemp where tel='0000'
+ delete from biletagemtemp where tel='000'
+ delete from biletagemtemp where tel='00'
+ 
+ delete from biletagemtemp where tel='0210000000'
+ delete from biletagemtemp where right(tel,7)='000000000'
+ 
+
+
+
+BULK INSERT codcli FROM 'c:\bi\codcli.csv' WITH
+(
+    FIRSTROW = 2,
+    FIELDTERMINATOR = ';',  --CSV field delimiter
+    ROWTERMINATOR = '\n',   --Use to shift the control to next row
+    TABLOCK
+)
+
+
+ update codcli set col01=replace(col01,' ','')
+ update codcli set col02=replace(col02,' ','')
+ update codcli set col03=replace(col03,' ','')
+ update codcli set col04=replace(col04,' ','')
+ update codcli set col05=replace(col05,' ','')
+ update codcli set col06=replace(col06,' ','')
+ update codcli set col01=replace(col01,'-','')
+ update codcli set col02=replace(col02,'-','')
+ update codcli set col03=replace(col03,'-','')
+ update codcli set col04=replace(col04,'-','')
+ update codcli set col05=replace(col05,'-','')
+ update codcli set col06=replace(col06,'-','')
+ update codcli set col01=replace(col01,'(','')
+ update codcli set col02=replace(col02,'(','')
+ update codcli set col03=replace(col03,'(','')
+ update codcli set col04=replace(col04,'(','')
+ update codcli set col05=replace(col05,'(','')
+ update codcli set col06=replace(col06,'(','')
+ update codcli set col01=replace(col01,')','')
+ update codcli set col02=replace(col02,')','')
+ update codcli set col03=replace(col03,')','')
+ update codcli set col04=replace(col04,')','')
+ update codcli set col05=replace(col05,')','')
+ update codcli set col06=replace(col06,')','')
+ update codcli set col01=replace(col01,';','')
+ update codcli set col02=replace(col02,';','')
+ update codcli set col03=replace(col03,';','')
+ update codcli set col04=replace(col04,';','')
+ update codcli set col05=replace(col05,';','')
+  update codcli set col06=replace(col06,';','')
+
+
+  update codcli set col01=replace(col01,';,;','')
+  update codcli set col02=replace(col02,';,;','')
+  update codcli set col03=replace(col03,';,;','')
+  update codcli set col04=replace(col04,';,;','')
+  update codcli set col05=replace(col05,';,;','')
+  update codcli set col06=replace(col06,';,;','')
+
+  
+  update codcli set col01=replace(col01,'á','')
+  update codcli set col02=replace(col02,'á','')
+  update codcli set col03=replace(col03,'á','')
+  update codcli set col04=replace(col04,'á','')
+  update codcli set col05=replace(col05,'á','')
+  update codcli set col06=replace(col06,'á','')
+
+
+  update codcli set col01=replace(col01,'.','')
+  update codcli set col02=replace(col02,'.','')
+  update codcli set col03=replace(col03,'.','')
+  update codcli set col04=replace(col04,'.','')
+  update codcli set col05=replace(col05,'.','')
+  update codcli set col06=replace(col06,'.','')
+
+
+ update codcli set col02=null where len(col02)<=2
+ update codcli set col03=null where len(col03)<=2 
+ update codcli set col04=null where len(col04)<=2
+ update codcli set col05=null where len(col05)<=2 
+ update codcli set col06=null where len(col06)<=2
+
+ update codcli set col03=null where col02=col03
+ update codcli set col04=null where col02=col04
+ update codcli set col05=null where col02=col05
+ update codcli set col06=null where col02=col06
+
+
+ update codcli set col02=null where col02='00'
+ update codcli set col02=null where col02='000'
+ update codcli set col02=null where col02='0000'
+ update codcli set col02=null where col02='00000'
+ update codcli set col02=null where col02='000000'
+ update codcli set col02=null where col02='0000000'
+ update codcli set col02=null where col02='00000000'
+ update codcli set col02=null where col02='000000000'
+ update codcli set col02=null where col02='0000000000'
+ update codcli set col02=null where col02='0210000000'
+
+
+ update codcli set col03=null where col03='00'
+ update codcli set col03=null where col03='000'
+ update codcli set col03=null where col03='0000'
+ update codcli set col03=null where col03='00000'
+ update codcli set col03=null where col03='000000'
+ update codcli set col03=null where col03='0000000'
+ update codcli set col03=null where col03='00000000'
+ update codcli set col03=null where col03='000000000'
+ update codcli set col03=null where col03='0000000000'
+ update codcli set col03=null where col03='0210000000'
+
+ update codcli set col04=null where col04='00'
+ update codcli set col04=null where col04='000'
+ update codcli set col04=null where col04='0000'
+ update codcli set col04=null where col04='00000'
+ update codcli set col04=null where col04='000000'
+ update codcli set col04=null where col04='0000000'
+ update codcli set col04=null where col04='0000000000'
+ update codcli set col04=null where col04='0210000000'
+
+ update codcli set col05=null where col05='00'
+ update codcli set col05=null where col05='000000'
+ update codcli set col05=null where col05='0000000'
+ update codcli set col05=null where col05='00000000'
+ update codcli set col05=null where col05='000000000'
+ update codcli set col05=null where col05='0000000000'
+										  
+ update codcli set col05=null where col05='0210000000'
+
+
+ update codcli set col06=null where col06='00'
+ update codcli set col06=null where col06='000000'
+ update codcli set col06=null where col06='0000000'
+ update codcli set col06=null where col06='00000000'
+ update codcli set col06=null where col06='000000000'
+ update codcli set col06=null where col06='0000000000'
+ update codcli set col06=null where col06='0210000000'
+ 
+
+update codcli set col02='32124002',col03='32124002',col04='32124002',col05='32124002',col06='32124002' where  col02 ='32124002122' or col02 ='32124002122' or col02 ='32124002122' or col02 ='32124002122' or col02 ='32124002122'
+
+ 
+ 
+ update biletagemtemp set tel=replace(tel,' ','')
+
+ update biletagemtemp set ramal=replace(ramal,' ','')
+
+ insert into callcodcli(dt,tel, tempo , codcli )
+ select b.dt,b.tel,b.tp,c.col01 from biletagemtemp b
+ left join codcli c on right(b.tel,7)=right(c.col02,7)
+ where c.col01 is not null 
+
+  insert into callcodcli(dt,tel, tempo , codcli )
+ select b.dt,b.tel,b.tp,c.col01 from biletagemtemp b
+ left join codcli c on right(b.tel,7)=right(c.col03,7)
+ where c.col01 is not null 
+
+  insert into callcodcli(dt,tel, tempo , codcli )
+ select b.dt,b.tel,b.tp,c.col01 from biletagemtemp b
+ left join codcli c on right(b.tel,7)=right(c.col04,7)
+ where c.col01 is not null 
+
+
+  insert into callcodcli(dt,tel, tempo , codcli )
+ select b.dt,b.tel,b.tp,c.col01 from biletagemtemp b
+ left join codcli c on right(b.tel,7)=right(c.col05,7)
+ where c.col01 is not null 
+
+  insert into callcodcli(dt,tel, tempo , codcli )
+ select b.dt,b.tel,b.tp,c.col01 from biletagemtemp b
+ left join codcli c on right(b.tel,7)=right(c.col06,7)
+ where c.col01 is not null 
+
+ delete from callcodcli  where tel='35598570'
+ delete from callcodcli  where tel='02135598570'
+ delete from callcodcli  where tel='2135598570'
+
+ 
+ 
+
+ select * from callcodcli
+
+ 
+
+
+
+ 
+
+ /*
+select 
+SUBSTRING ( dslinha ,1 , 8 )dt,
+SUBSTRING ( dslinha ,22 , 4 )ramal,
+SUBSTRING ( dslinha ,39 , 10 )telfone,
+SUBSTRING ( dslinha ,34 , 5 )tempo,*
+from biletagem 
+
+  select * from codcli
+*/
+GO
+/****** Object:  StoredProcedure [dbo].[sp_alter_user]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[sp_alter_user] @NOME Nvarchar(100),@SENHA Nvarchar(100),@PER Nvarchar(100),@tprca Nvarchar(100),@equipe Nvarchar(100),@ramal Nvarchar(100),@rca Nvarchar(max),@id int
+as
+
+--alter table  usuario add equipe nvarchar(100)
+--alter table  usuario add ramal nvarchar(100)
+--alter table  usuario add rca nvarchar(100)
+
+
+update usuario set nome=@NOME,senha=@SENHA,per=@PER,tipo=@tprca,rca=@rca,equipe=@equipe  where id=@id
+GO
+/****** Object:  StoredProcedure [dbo].[sp_cad_user]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE procedure [dbo].[sp_cad_user] @NOME Nvarchar(100),@SENHA Nvarchar(100),@PER Nvarchar(100),@tprca Nvarchar(100),@equipe Nvarchar(100),@ramal Nvarchar(100),@rca Nvarchar(max)
+as
+
+--alter table  usuario add equipe nvarchar(100)
+--alter table  usuario add ramal nvarchar(100)
+--alter table  usuario add rca nvarchar(100)
+insert into usuario (nome,senha,per,tipo,ramal,rca,equipe)
+select @NOME,@SENHA,@PER,@tprca,@ramal,@rca,@equipe
+GO
+/****** Object:  StoredProcedure [dbo].[sp_cad_user2]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[sp_cad_user2] @NOME nvarchar(max),@url nvarchar(max),@ID nvarchar(100)
+as
+--drop table bi
+--create table bi (id int identity(1,1),urls nvarchar(max),nome nvarchar(100),iduser int)
+
+insert into bi(urls ,nome,iduser )
+select @url,@NOME,@ID
+GO
+/****** Object:  StoredProcedure [dbo].[sp_exl_user]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[sp_exl_user] @id int
+as
+
+delete from usuario where id=@id
+GO
+/****** Object:  StoredProcedure [dbo].[sp_exl_user1]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[sp_exl_user1]  @ID int
+as
+
+delete from bi where id=@id
+GO
+/****** Object:  StoredProcedure [dbo].[userlist]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[userlist] @id int
+as select * from Usuario where id=@id
+GO
+/****** Object:  StoredProcedure [dbo].[validar]    Script Date: 28/03/2023 17:47:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create procedure [dbo].[validar] @usuario nvarchar(100)
+as
+select * from usuario
+where nome=@usuario
+GO
+USE [master]
+GO
+ALTER DATABASE [BI] SET  READ_WRITE 
+GO
