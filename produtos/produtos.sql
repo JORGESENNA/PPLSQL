@@ -15,7 +15,6 @@ RPAD(Po.CODPROD,20,' ') || '|' ||
 RPAD(Po.CODAUXILIAR,14,' ') || '|' ||
 LPAD (1, 2, 0) || '|' ||
 LPAD (1, 2, 0) || '|' ||
---case when P.PUNIT < 1 then TO_CHAR(P.PUNIT,'0.99') else TO_CHAR(P.PUNIT,'999.99') end || '|' ||
 RPAD (po.qtunit, 2, 0) || '|' ||
 RPAD(po.descricao,100,' ') || '|' ||
 case when po.dtexclusao is null then '01' else '02' end
